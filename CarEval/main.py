@@ -29,4 +29,17 @@ y = list(class_)
 
 x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
 
-print(x_train, y_test)
+model = KNeighborsClassifier(n_neighbors=7)
+
+model.fit(x_train, y_train)
+
+acc = model.score(x_test, y_test)
+print(acc)
+
+predicted = model.predict(x_test)
+names = ['unacc', 'acc', 'good', 'vgood'] # Recoverting numbers into string so it's easyer to see
+
+for _ in range(len(predicted)):
+    print(f'Pred: {names[predicted[_]]} | Data: {x_test[_]} | Acctual: {names[y_test[_]]}')
+    # knbgs = model.kneighbors([x_test[_]], 7, True)
+    # print("Neighbours: ", knbgs)
